@@ -330,4 +330,4 @@ MIT License - See LICENSE file for details
 
 ---
 
-**SeptemberAI** - Advanced AI Systems
+Made with 💚 from Sharan
