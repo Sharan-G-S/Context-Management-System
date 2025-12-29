@@ -2,7 +2,7 @@
 
 **Enterprise-grade AI memory management system with RAG, autonomous agents, and intelligent context assembly.**
 
-*Developed by SeptemberAI*
+*Developed by Sharan*
 
 ---
 
