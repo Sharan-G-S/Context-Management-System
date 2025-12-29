@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  cms_app:
+    build: .
+    container_name: cms_app
+    ports:
+      - "5000:5000"
+    environment:
+      - GROQ_API_KEY=${GROQ_API_KEY}
+      - SQLITE_DB_PATH=/app/data/cms_memory.db
+      - FLASK_ENV=production
+      - FLASK_DEBUG=False
+    volumes:
+      - ./config:/app/config
+      - ./data:/app/data
+    restart: unless-stopped
+
+volumes:
+  sqlite_data:
+

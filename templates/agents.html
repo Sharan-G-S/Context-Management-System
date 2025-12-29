@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agents - SeptemberAI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h1>Context Management System</h1>
+            </div>
+            <div class="nav-company">
+                <span>SeptemberAI</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <aside class="sidebar">
+            <ul class="nav-links">
+                <li><a href="/">Dashboard</a></li>
+                <li><a href="/memory">Memory Management</a></li>
+                <li><a href="/rag">RAG System</a></li>
+                <li><a href="/agents" class="active">Agents</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <div class="page-header">
+                <h2>Agent System</h2>
+                <p>Autonomous agents for research and task execution</p>
+            </div>
+
+            <div class="section">
+                <h3>How Research Agent Works</h3>
+                <div class="agent-workflow">
+                    <div class="workflow-step">
+                        <div class="step-number">1</div>
+                        <div class="step-card">
+                            <h4>Input</h4>
+                            <p>Receive research question</p>
+                            <small>User query analyzed</small>
+                        </div>
+                    </div>
+                    <div class="workflow-arrow">→</div>
+                    <div class="workflow-step">
+                        <div class="step-number">2</div>
+                        <div class="step-card">
+                            <h4>Search</h4>
+                            <p>RAG document retrieval</p>
+                            <small>Semantic search in knowledge base</small>
+                        </div>
+                    </div>
+                    <div class="workflow-arrow">→</div>
+                    <div class="workflow-step">
+                        <div class="step-number">3</div>
+                        <div class="step-card">
+                            <h4>Memory</h4>
+                            <p>Context assembly</p>
+                            <small>Core, Semantic, Episodic memories</small>
+                        </div>
+                    </div>
+                    <div class="workflow-arrow">→</div>
+                    <div class="workflow-step">
+                        <div class="step-number">4</div>
+                        <div class="step-card">
+                            <h4>LLM</h4>
+                            <p>Answer generation</p>
+                            <small>Groq AI processing</small>
+                        </div>
+                    </div>
+                    <div class="workflow-arrow">→</div>
+                    <div class="workflow-step">
+                        <div class="step-number">5</div>
+                        <div class="step-card">
+                            <h4>Analysis</h4>
+                            <p>Extract insights</p>
+                            <small>Key findings & patterns</small>
+                        </div>
+                    </div>
+                    <div class="workflow-arrow">→</div>
+                    <div class="workflow-step">
+                        <div class="step-number">6</div>
+                        <div class="step-card output">
+                            <h4>Output</h4>
+                            <p>Comprehensive answer</p>
+                            <small>With sources & analysis</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Research Agent</h3>
+                <p class="description">The Research Agent can search through documents, analyze information, and provide comprehensive answers to research questions.</p>
+                
+                <form id="research-form">
+                    <div class="form-group">
+                        <label for="research-question">Research Question</label>
+                        <input type="text" id="research-question" placeholder="Example: What is context management and how does it optimize AI performance?" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Run Research Agent</button>
+                </form>
+            </div>
+
+            <div id="research-results" class="section" style="display: none;">
+                <h3>Research Results</h3>
+                <div class="research-box">
+                    <div class="research-item">
+                        <strong>Question:</strong>
+                        <p id="result-question"></p>
+                    </div>
+                    <div class="research-item">
+                        <strong>Answer:</strong>
+                        <p id="result-answer"></p>
+                    </div>
+                    <div class="research-item">
+                        <strong>Analysis:</strong>
+                        <p id="result-analysis"></p>
+                    </div>
+                    <div class="research-item">
+                        <strong>Sources Found:</strong>
+                        <p id="result-sources-count"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Agent Execution Logs</h3>
+                <button id="refresh-logs" class="btn btn-secondary">Refresh Logs</button>
+                <div class="logs-container" id="agent-logs">
+                    <p class="loading">Loading logs...</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/agents.js') }}"></script>
+</body>
+</html>

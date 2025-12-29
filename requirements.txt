@@ -1,0 +1,49 @@
+# Core Dependencies
+tiktoken>=0.5.0
+numpy>=1.24.0
+pydantic>=2.0.0
+python-dateutil>=2.8.0
+PyYAML>=6.0
+
+# Web Framework
+Flask>=3.0.0
+Flask-CORS>=4.0.0
+
+# HTTP Requests
+requests>=2.31.0
+
+# Environment Variables
+python-dotenv>=1.0.0
+
+# Testing
+pytest>=7.4.0
+
+# Note: SQLite is built into Python - no additional dependencies needed
+
+# Optional: For advanced features
+# sentence-transformers>=2.2.0  # For real embedding models
+# faiss-cpu>=1.7.4  # For vector search
+# spacy>=3.7.0  # For NLP tasks
+
+# Storage and Serialization
+sqlalchemy>=2.0.0
+redis>=5.0.0
+msgpack>=1.0.0
+
+# Utilities
+pyyaml>=6.0
+loguru>=0.7.0
+tenacity>=8.2.0
+
+# Development
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+pytest-cov>=4.1.0
+black>=23.0.0
+ruff>=0.1.0
+mypy>=1.7.0
+
+# Optional Providers
+# anthropic>=0.8.0
+# cohere>=4.0.0
+# together>=0.2.0

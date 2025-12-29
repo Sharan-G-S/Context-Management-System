@@ -1,0 +1,144 @@
+# Context Management System Configuration
+
+# Model Configuration
+model:
+  name: "gpt-4"
+  provider: "openai"
+  max_tokens: 8192
+  context_window: 8192
+  tokenizer: "cl100k_base"  # For GPT-4
+
+# Memory Configuration
+memory:
+  core_max_tokens: 1000
+  core_importance_threshold: 0.9
+  core_immutable: true
+  semantic_max_tokens: 2000
+  semantic_max_entries: 1000
+  semantic_similarity_threshold: 0.7
+  episodic_max_tokens: 1500
+  episodic_max_entries: 500
+  episodic_retention_days: 30
+  working_max_tokens: 3000
+  working_max_turns: 10
+  working_compression_threshold: 0.8
+
+# Token Budget Allocation (percentages)
+token_budget:
+  system: 0.10      # 10% for system instructions
+  core: 0.12        # 12% for core memory
+  semantic: 0.25    # 25% for semantic long-term memory
+  episodic: 0.18    # 18% for episodic long-term memory
+  working: 0.30     # 30% for working memory
+  reserve: 0.05     # 5% reserve buffer
+
+# Summarization Configuration
+summarization:
+  enabled: true
+  model: "gpt-3.5-turbo"
+  strategy: "extractive"  # extractive, abstractive, hybrid
+  compression_ratio: 0.3
+  min_length: 100
+  max_length: 500
+  batch_size: 5
+
+# Context Assembly Configuration
+assembly:
+  section_order:
+    - "system"
+    - "core_memory"
+    - "semantic_memory"
+    - "episodic_memory"
+    - "working_memory"
+    - "current_task"
+  
+  importance_weights:
+    recency: 0.3
+    relevance: 0.4
+    importance: 0.3
+  
+  position_bias_mitigation: true
+  deduplication: true
+
+# Optimization Strategies
+optimization:
+  enabled: true
+  strategies:
+    - "relevance_ranking"
+    - "temporal_decay"
+    - "importance_pruning"
+    - "semantic_clustering"
+  
+  auto_prune:
+    enabled: true
+    interval_hours: 24
+    threshold: 0.4
+
+# Policy Configuration
+policies:
+  strict_budget: true
+  allow_overflow: false
+  overflow_strategy: "compress"  # compress, truncate, summarize
+  
+  importance_scoring:
+    user_explicit: 1.0
+    system_critical: 0.95
+    task_relevant: 0.8
+    recent_interaction: 0.7
+    background_info: 0.5
+
+# Observability Configuration
+observability:
+  logging:
+    level: "INFO"
+    format: "json"
+    output: "logs/cms.log"
+  
+  metrics:
+    enabled: true
+    track_token_usage: true
+    track_latency: true
+    track_memory_stats: true
+  
+  tracing:
+    enabled: false
+    sample_rate: 0.1
+
+# Storage Configuration
+storage:
+  backend: "local"  # local, redis, postgresql
+  path: "data/cms_storage"
+  
+  persistence:
+    enabled: true
+    auto_save: true
+    save_interval: 300  # seconds
+  
+  redis:
+    host: "localhost"
+    port: 6379
+    db: 0
+  
+  postgresql:
+    host: "localhost"
+    port: 5432
+    database: "cms_db"
+    user: "cms_user"
+    password: ""
+
+# Advanced Features
+features:
+  semantic_memory:
+    enabled: true
+    embedding_cache: true
+    reranking: true
+  
+  episodic_memory:
+    enabled: true
+    temporal_indexing: true
+    event_linking: true
+  
+  context_optimization:
+    enabled: true
+    adaptive_budgets: true
+    predictive_loading: false

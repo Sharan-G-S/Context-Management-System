@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAG System - SeptemberAI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h1>Context Management System</h1>
+            </div>
+            <div class="nav-company">
+                <span>SeptemberAI</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <aside class="sidebar">
+            <ul class="nav-links">
+                <li><a href="/">Dashboard</a></li>
+                <li><a href="/memory">Memory Management</a></li>
+                <li><a href="/rag" class="active">RAG System</a></li>
+                <li><a href="/agents">Agents</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <div class="page-header">
+                <h2>RAG System</h2>
+                <p>Retrieval-Augmented Generation for document querying</p>
+            </div>
+
+            <div class="section">
+                <h3>Ingest Document</h3>
+                <form id="ingest-form">
+                    <div class="form-group">
+                        <label for="doc-content">Document Content</label>
+                        <textarea id="doc-content" rows="6" placeholder="Example: Context management is a critical component of AI systems that helps optimize token usage by intelligently selecting and organizing relevant information from different memory types. It ensures that language models receive the most pertinent context while staying within token limits." required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="doc-source">Source (optional)</label>
+                        <input type="text" id="doc-source" placeholder="Example: AI_Documentation.pdf or https://example.com/article">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Ingest Document</button>
+                </form>
+                <div id="ingest-result" class="result-message"></div>
+            </div>
+
+            <div class="section">
+                <h3>Query Documents</h3>
+                <form id="query-form">
+                    <div class="form-group">
+                        <label for="question">Question</label>
+                        <input type="text" id="question" placeholder="Example: How does context management optimize AI performance?" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="top-k">Number of Sources</label>
+                        <select id="top-k">
+                            <option value="3">3</option>
+                            <option value="5" selected>5</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Query</button>
+                </form>
+            </div>
+
+            <div id="query-results" class="section" style="display: none;">
+                <h3>Answer</h3>
+                <div class="answer-box" id="answer"></div>
+                
+                <h3>Sources</h3>
+                <div id="sources" class="sources-list"></div>
+            </div>
+
+            <div class="section">
+                <h3>RAG Statistics</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="info-label">Total Documents:</span>
+                        <span class="info-value" id="rag-total-docs">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Database Size:</span>
+                        <span class="info-value" id="rag-db-size">-</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/rag.js') }}"></script>
+</body>
+</html>

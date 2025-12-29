@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Management - SeptemberAI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h1>Context Management System</h1>
+            </div>
+            <div class="nav-company">
+                <span>SeptemberAI</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <aside class="sidebar">
+            <ul class="nav-links">
+                <li><a href="/">Dashboard</a></li>
+                <li><a href="/memory" class="active">Memory Management</a></li>
+                <li><a href="/rag">RAG System</a></li>
+                <li><a href="/agents">Agents</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <div class="page-header">
+                <h2>Memory Management</h2>
+                <p>View and manage different memory types</p>
+            </div>
+
+            <div class="section">
+                <h3>Memory Type Overview</h3>
+                <div class="memory-overview">
+                    <div class="memory-card core-card">
+                        <h4>Core Memory</h4>
+                        <div class="memory-count" id="overview-core">0</div>
+                        <p>Essential long-term facts</p>
+                        <small>High importance, persistent</small>
+                    </div>
+                    <div class="memory-card semantic-card">
+                        <h4>Semantic Memory</h4>
+                        <div class="memory-count" id="overview-semantic">0</div>
+                        <p>Facts & relationships</p>
+                        <small>Entity-relation-value triples</small>
+                    </div>
+                    <div class="memory-card episodic-card">
+                        <h4>Episodic Memory</h4>
+                        <div class="memory-count" id="overview-episodic">0</div>
+                        <p>Events & experiences</p>
+                        <small>Time-stamped occurrences</small>
+                    </div>
+                    <div class="memory-card working-card">
+                        <h4>Working Memory</h4>
+                        <div class="memory-count" id="overview-working">0</div>
+                        <p>Current conversation</p>
+                        <small>Short-term context buffer</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="core">Core Memory</button>
+                <button class="tab-btn" data-tab="semantic">Semantic Memory</button>
+                <button class="tab-btn" data-tab="episodic">Episodic Memory</button>
+                <button class="tab-btn" data-tab="working">Working Memory</button>
+            </div>
+
+            <div class="tab-content active" id="core-tab">
+                <h3>Core Memory Items</h3>
+                <div class="memory-list" id="core-list">
+                    <p class="loading">Loading...</p>
+                </div>
+            </div>
+
+            <div class="tab-content" id="semantic-tab">
+                <h3>Semantic Memory Facts</h3>
+                <div class="memory-list" id="semantic-list">
+                    <p class="loading">Loading...</p>
+                </div>
+            </div>
+
+            <div class="tab-content" id="episodic-tab">
+                <h3>Episodic Memory Episodes</h3>
+                <div class="memory-list" id="episodic-list">
+                    <p class="loading">Loading...</p>
+                </div>
+            </div>
+
+            <div class="tab-content" id="working-tab">
+                <h3>Working Memory Turns</h3>
+                <div class="memory-list" id="working-list">
+                    <p class="loading">Loading...</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/memory.js') }}"></script>
+</body>
+</html>

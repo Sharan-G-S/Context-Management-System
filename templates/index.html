@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CMS Dashboard - SeptemberAI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h1>Context Management System</h1>
+            </div>
+            <div class="nav-company">
+                <span>SeptemberAI</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <aside class="sidebar">
+            <ul class="nav-links">
+                <li><a href="/" class="active">Dashboard</a></li>
+                <li><a href="/memory">Memory Management</a></li>
+                <li><a href="/rag">RAG System</a></li>
+                <li><a href="/agents">Agents</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <div class="page-header">
+                <h2>Dashboard Overview</h2>
+                <p>Monitor system performance and memory statistics</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">💾</div>
+                    <h3>Core Memory</h3>
+                    <p class="stat-value" id="core-count">-</p>
+                    <p class="stat-label">Items</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🧠</div>
+                    <h3>Semantic Memory</h3>
+                    <p class="stat-value" id="semantic-count">-</p>
+                    <p class="stat-label">Facts</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📝</div>
+                    <h3>Episodic Memory</h3>
+                    <p class="stat-value" id="episodic-count">-</p>
+                    <p class="stat-label">Episodes</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⚡</div>
+                    <h3>Working Memory</h3>
+                    <p class="stat-value" id="working-count">-</p>
+                    <p class="stat-label">Turns</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📚</div>
+                    <h3>RAG Documents</h3>
+                    <p class="stat-value" id="rag-count">-</p>
+                    <p class="stat-label">Chunks</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🤖</div>
+                    <h3>Agent Logs</h3>
+                    <p class="stat-value" id="agent-logs-count">-</p>
+                    <p class="stat-label">Actions</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>System Information</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="info-label">Database Size:</span>
+                        <span class="info-value" id="db-size">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Status:</span>
+                        <span class="info-value status-active">Active</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Last Updated:</span>
+                        <span class="info-value" id="last-updated">-</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Context Query & Optimization</h3>
+                <p class="description">Test context management with token visualization</p>
+                
+                <form id="context-query-form">
+                    <div class="form-group">
+                        <label for="query-text">Input Context/Query</label>
+                        <textarea id="query-text" placeholder="Example: Well, you know, I was basically thinking that we could like, actually implement a feature that would, you know, sort of help users understand the system better and make it more user-friendly." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Optimize Context</button>
+                </form>
+                
+                <div id="token-visualization" style="display: none;">
+                    <div class="token-stats">
+                        <div class="token-card original">
+                            <h4>Original Input</h4>
+                            <div class="token-count" id="original-tokens">0</div>
+                            <p class="token-label">tokens</p>
+                            <div class="text-preview">
+                                <p class="preview-label">Text:</p>
+                                <div class="preview-content" id="original-text-preview"></div>
+                            </div>
+                        </div>
+                        <div class="token-arrow">→</div>
+                        <div class="token-card optimized">
+                            <h4>Optimized Context</h4>
+                            <div class="token-count" id="optimized-tokens">0</div>
+                            <p class="token-label">tokens</p>
+                            <div class="text-preview">
+                                <p class="preview-label">Text:</p>
+                                <div class="preview-content" id="optimized-text-preview"></div>
+                            </div>
+                        </div>
+                        <div class="token-card savings">
+                            <h4>Token Savings</h4>
+                            <div class="token-count savings-percent" id="token-savings">0%</div>
+                            <p class="token-label">reduction</p>
+                            <div class="savings-details">
+                                <p id="tokens-saved"></p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="visual-comparison">
+                        <h4>Visual Token Comparison</h4>
+                        <div class="comparison-bars">
+                            <div class="comparison-row">
+                                <div class="comparison-label">Original:</div>
+                                <div class="bar-container">
+                                    <div class="bar bar-original" id="bar-original" style="width: 100%">
+                                        <span class="bar-value" id="bar-original-value">0 tokens</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="comparison-row">
+                                <div class="comparison-label">Optimized:</div>
+                                <div class="bar-container">
+                                    <div class="bar bar-optimized" id="bar-optimized" style="width: 100%">
+                                        <span class="bar-value" id="bar-optimized-value">0 tokens</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="comparison-summary">
+                                <div class="summary-item">
+                                    <span class="summary-icon">📊</span>
+                                    <span class="summary-text">Efficiency Gained: <strong id="efficiency-percent">0%</strong></span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="summary-icon">⚡</span>
+                                    <span class="summary-text">Tokens Saved: <strong id="efficiency-tokens">0</strong></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="token-chart">
+                        <h4>Token Optimization Chart</h4>
+                        <div class="chart-container">
+                            <canvas id="tokenChart"></canvas>
+                        </div>
+                        <div class="chart-legend">
+                            <div class="legend-item">
+                                <span class="legend-color original-color"></span>
+                                <span class="legend-label">Original Tokens</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color optimized-color"></span>
+                                <span class="legend-label">Optimized Tokens</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color saved-color"></span>
+                                <span class="legend-label">Tokens Saved</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Memory Management Flow</h3>
+                <div class="memory-flow-diagram">
+                    <div class="flow-stage">
+                        <div class="flow-card input">
+                            <div class="flow-icon">📥</div>
+                            <h4>Input</h4>
+                            <p>User Query/Context</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flow-arrow">↓</div>
+                    
+                    <div class="flow-stage short-term">
+                        <div class="flow-card">
+                            <div class="flow-icon">⚡</div>
+                            <h4>Short-Term Memory</h4>
+                            <p class="flow-label">Working Memory</p>
+                            <p class="flow-value" id="flow-working">0 items</p>
+                            <small>Current conversation context</small>
+                        </div>
+                    </div>
+                    
+                    <div class="flow-arrow">↓</div>
+                    
+                    <div class="flow-stage long-term">
+                        <div class="flow-row">
+                            <div class="flow-card">
+                                <div class="flow-icon">🧠</div>
+                                <h4>Long-Term Memory</h4>
+                                <div class="memory-types">
+                                    <div class="memory-type">
+                                        <span class="memory-type-icon">🔍</span>
+                                        <strong>Semantic</strong>
+                                        <span class="memory-type-value" id="flow-semantic">0</span>
+                                        <small>Facts & Knowledge</small>
+                                    </div>
+                                    <div class="memory-type">
+                                        <span class="memory-type-icon">📖</span>
+                                        <strong>Episodic</strong>
+                                        <span class="memory-type-value" id="flow-episodic">0</span>
+                                        <small>Events & Experiences</small>
+                                    </div>
+                                    <div class="memory-type">
+                                        <span class="memory-type-icon">💎</span>
+                                        <strong>Core</strong>
+                                        <span class="memory-type-value" id="flow-core">0</span>
+                                        <small>Essential Info</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flow-arrow">↓</div>
+                    
+                    <div class="flow-stage">
+                        <div class="flow-card optimizer">
+                            <div class="flow-icon">⚙️</div>
+                            <h4>Context Optimizer</h4>
+                            <p>Relevance filtering & compression</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flow-arrow">↓</div>
+                    
+                    <div class="flow-stage">
+                        <div class="flow-card output">
+                            <div class="flow-icon">✨</div>
+                            <h4>Optimized Context</h4>
+                            <p>Reduced tokens, preserved meaning</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>Quick Actions</h3>
+                <div class="action-buttons">
+                    <a href="/memory" class="btn btn-primary">Manage Memory</a>
+                    <a href="/rag" class="btn btn-primary">Query Documents</a>
+                    <a href="/agents" class="btn btn-primary">Run Agents</a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>
